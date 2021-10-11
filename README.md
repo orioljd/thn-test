@@ -5,6 +5,10 @@
 
 This test require php 8, a mySQL database created, and composer to install dependencies.
 
+## Framework used and libraries
+I used Slim framework I found it a good framework and have a DDD structure ready to use.
+I use doctrine migrations to create all database necessary structure and data <https://www.doctrine-project.org/projects/doctrine-migrations/en/3.2/index.html>
+
 ## Installation
 
 Clone this project via git.
@@ -33,7 +37,9 @@ php .\vendor\bin\doctrine-migrations migrations:migrate
 ```
 It also inserts test data into the database to facilite your test. (normally this is not correct to do it on migrations)
 
-now you can test it via browser:
+## How to test
+
+You can test it via browser
 
 Example
 ```
@@ -46,4 +52,3 @@ Of course the id it's different of the generated in your DB, you can run:
 http://thn-test.test/hotels
 ```
 to get id's of the hotels
-
