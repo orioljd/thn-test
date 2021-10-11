@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Infrastructure\Migrations;
@@ -11,13 +10,13 @@ final class Version20211002162941 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'users table creation';
+        return 'clients table creation';
     }
 
     public function up(Schema $schema): void
     {
-        $this->addSql("CREATE TABLE `users` (
-                    `id` VARCHAR(32) NOT NULL,
+        $this->addSql("CREATE TABLE `clients` (
+                    `id` CHAR(36) NOT NULL,
 	                `name` VARCHAR(255) NOT NULL DEFAULT '',
 	                PRIMARY KEY (id)
                 ) COLLATE='utf8_general_ci'");
@@ -25,6 +24,6 @@ final class Version20211002162941 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql("DROP TABLE `users`");
+        $this->addSql("DROP TABLE `clients`");
     }
 }

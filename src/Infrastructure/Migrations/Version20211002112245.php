@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Infrastructure\Migrations;
@@ -18,7 +17,7 @@ final class Version20211002112245 extends AbstractMigration
     {
         $this->addSql(
             "CREATE TABLE `hotels` (
-                    `id` VARCHAR(32) NOT NULL,
+                    `id` CHAR(36) NOT NULL,
 	                `name` VARCHAR(255) NOT NULL DEFAULT '',
                     `address` TEXT(255) NOT NULL DEFAULT '',
 	                `stars` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,

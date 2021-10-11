@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Infrastructure\Migrations;
@@ -17,7 +16,8 @@ final class Version20211002160717 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql("CREATE TABLE `rooms` (
-                    `id` VARCHAR(32) NOT NULL,
+                    `id` CHAR(36) NOT NULL,
+	                `hotel_id` CHAR(36) NOT NULL,
 	                `name` VARCHAR(255) NOT NULL DEFAULT '',
                     `location` TEXT(50) NOT NULL DEFAULT '',
 	                `capacity` TINYINT(2) UNSIGNED NOT NULL DEFAULT 0,
