@@ -1,7 +1,7 @@
 
 # THN test by Oriol Jiménez
 
-## reuirements
+## requirements
 
 This test require php 8, a mySQL database created, and composer to install dependencies.
 
