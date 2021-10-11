@@ -9,6 +9,8 @@ use Monolog\Processor\UidProcessor;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable('../app/');
+$dotenv->load();
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         LoggerInterface::class => function (ContainerInterface $c) {
@@ -24,6 +26,23 @@ return function (ContainerBuilder $containerBuilder) {
             $logger->pushHandler($handler);
 
             return $logger;
+        },
+
+        PDO::class => function (ContainerInterface $c) {
+
+            $settings = $c->get(SettingsInterface::class);
+
+            $dbSettings = $settings->get('db');
+
+            $host = $dbSettings['host'];
+            $dbname = $dbSettings['database'];
+            $username = $dbSettings['username'];
+            $password = $dbSettings['password'];
+            $charset = $dbSettings['charset'];
+            $flags = $dbSettings['flags'];
+            $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+            return new PDO($dsn, $username, $password);
         },
     ]);
 };

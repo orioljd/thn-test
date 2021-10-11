@@ -1,42 +1,49 @@
-# Slim Framework 4 Skeleton Application
 
-[![Coverage Status](https://coveralls.io/repos/github/slimphp/Slim-Skeleton/badge.svg?branch=master)](https://coveralls.io/github/slimphp/Slim-Skeleton?branch=master)
+# THN test by Oriol Jiménez
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation. It also uses the Monolog logger.
+## reuirements
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+This test require php 8, a mySQL database created, and composer to install dependencies.
 
-## Install the Application
+## Installation
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+Clone this project via git.
 
+Install dependencies:
 ```bash
-composer create-project slim/slim-skeleton [my-app-name]
+composer install
 ```
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+configure .env file on app directory
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writable.
-
-To run the application in development, you can run these commands 
-
-```bash
-cd [my-app-name]
-composer start
+Example on .env:
+```
+DB_DRIVER="pdo_mysql"
+DB_HOST="localhost"
+DB_PORT=3306
+DB_DBNAME="thn"
+DB_USER="root"
+DB_PASSWORD=""
+DB_CHARSET="utf8"
 ```
 
-Or you can use `docker-compose` to run the app with `docker`, so you can run these commands:
+Then execute migrations, it creates all necessary tables on database, on the project directory execute:
 ```bash
-cd [my-app-name]
-docker-compose up -d
+php .\vendor\bin\doctrine-migrations migrations:migrate
 ```
-After that, open `http://localhost:8080` in your browser.
+It also inserts test data into the database to facilite your test. (normally this is not correct to do it on migrations)
 
-Run this command in the application directory to run the test suite
+now you can test it via browser:
 
-```bash
-composer test
+Example
 ```
+http://thn-test.test/hotels/99c64e58-a418-493c-bad6-e5e983e1264c
+```
+where ```http://thn-test.test``` is the local domain and ``99c64e58-a418-493c-bad6-e5e983e1264c`` is the id of the hotel
 
-That's it! Now go build something cool.
+Of course the id it's different of the generated in your DB, you can run:
+```
+http://thn-test.test/hotels
+```
+to get id's of the hotels
+

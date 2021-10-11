@@ -34,14 +34,31 @@ return function (ContainerBuilder $containerBuilder) {
                     'metadata_dirs' => [APP_ROOT . '/src/Domain'],
 
                     'connection' => [
-                        'driver' => 'pdo_mysql',
-                        'host' => 'localhost',
-                        'port' => 3306,
-                        'dbname' => 'thn-test',
-                        'user' => 'root',
-                        'password' => '',
-                        'charset' => 'utf-8'
-                    ]
+                        'driver' => getenv('DB_DRIVER'),
+                        'host' => getenv('DB_HOST'),
+                        'dbname' => getenv('DB_DBNAME'),
+                        'user' => getenv('DB_USER'),
+                        'password' => getenv('DB_PASSWORD'),
+                        'port' => getenv('DB_PORT'),
+                        'charset' => getenv('DB_CHARSET'),
+                    ],
+                ],
+                "db" => [
+                    'host' => getenv('DB_HOST'),
+                    'database' => getenv('DB_DBNAME'),
+                    'username' => getenv('DB_USER'),
+                    'password' => getenv('DB_PASSWORD'),
+                    'charset' => getenv('DB_CHARSET'),
+                    'flags' => [
+                        // Turn off persistent connections
+                        PDO::ATTR_PERSISTENT => false,
+                        // Enable exceptions
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        // Emulate prepared statements
+                        PDO::ATTR_EMULATE_PREPARES => true,
+                        // Set default fetch mode to array
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    ],
                 ],
             ]);
         }
