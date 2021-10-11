@@ -10,6 +10,24 @@ use App\Infrastructure\Persistence\Shared\PDORepository;
 
 class PDOHotelRepository extends PDORepository implements HotelRepository
 {
+
+    /**
+     * return Hotel[]
+     */
+    public function findAll(): array
+    {
+        $stm = $this->connection->prepare('SELECT * FROM hotels');
+        $stm->execute();
+
+        $hotels = [];
+        $results = $stm->fetchAll();
+        foreach ($results as $hotel) {
+            $hotels[] = new Hotel($hotel['id'], $hotel['name'], $hotel['address'], (int) $hotel['stars']);
+        }
+
+        return $hotels;
+    }
+
     /**
      * {@inheritdoc}
      */

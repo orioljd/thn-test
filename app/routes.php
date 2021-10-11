@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use App\Application\Actions\Client\ListClientsAction;
 use App\Application\Actions\Client\ViewClientAction;
+use App\Application\Actions\Hotel\ListHotelsAction;
 use App\Application\Actions\Hotel\ViewHotelAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,6 +27,7 @@ return function (App $app) {
     });
 
     $app->group('/hotels', function (Group $group) {
+        $group->get('', ListHotelsAction::class);
         $group->get('/{id}', ViewHotelAction::class);
     });
 };
